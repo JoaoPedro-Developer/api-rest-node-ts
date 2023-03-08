@@ -2,6 +2,11 @@ import { SignUpController } from './signup'
 import { EmailValidator } from '../protocols/email-validator'
 import { InvalidParamError, MissingParamError, ServerError } from '../errors'
 
+interface SutTypes {
+  sut: SignUpController
+  emailValidatorStub: EmailValidator
+}
+
 const makeEmailValidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {
     isValid (email: string): boolean {
@@ -9,20 +14,6 @@ const makeEmailValidator = (): EmailValidator => {
     }
   }
   return new EmailValidatorStub()
-}
-
-const makeEmailValidatorWithError = (): EmailValidator => {
-  class EmailValidatorStub implements EmailValidator {
-    isValid (email: string): boolean {
-      throw new Error()
-    }
-  }
-  return new EmailValidatorStub()
-}
-
-interface SutTypes {
-  sut: SignUpController
-  emailValidatorStub: EmailValidator
 }
 
 const makeSut = (): SutTypes => {
@@ -127,8 +118,10 @@ describe('SingnUp Controller', () => {
   })
 
   test('Should return 500 email validator throws', () => {
-    const emailValidatorStub = makeEmailValidatorWithError()
-    const sut = new SignUpController(emailValidatorStub)
+    const { sut, emailValidatorStub } = makeSut()
+    jest.spyOn(emailValidatorStub, 'isValid').mockImplementationOnce(() => {
+      throw new Error()
+    })
     const httpRequest = {
       body: {
         name: 'any_name',
