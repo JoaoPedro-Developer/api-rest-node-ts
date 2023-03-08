@@ -11,7 +11,7 @@ export class SignUpController implements Controller {
   }
 
   // Após o Handle e o Parametro deve-se definir o Tipo do parametro (HttpRequest) e em seguida o tipo de dado do retorno (HttpResponse)
-  handle (httpRequest: HttpRequest): HttpResponse {
+  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const requiredFields = ['name', 'email', 'password', 'passwordConfirmation']
       for (const field of requiredFields) {
@@ -27,7 +27,7 @@ export class SignUpController implements Controller {
       if (!isValid) {
         return badRequest(new InvalidParamError('email'))
       }
-      const account = this.addAccount.add({
+      const account = await this.addAccount.add({
         name,
         email,
         password
