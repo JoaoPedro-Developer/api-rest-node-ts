@@ -23,7 +23,7 @@ const makeAddAccountRepository = (): AddAccountRepository => {
         id: 'valid_id',
         name: 'valid_name',
         email: 'valid_email',
-        password: 'valid_password'
+        password: 'hashed_password'
       }
       return new Promise(resolve => resolve(fakeAccount))
     }
@@ -93,5 +93,21 @@ describe('', () => {
     }
     const prormise = sut.add(dataAccount)
     await expect(prormise).rejects.toThrow()
+  })
+
+  test('Should return an account if on success', async () => {
+    const { sut } = makeSut()
+    const dataAccount = {
+      name: 'valid_name',
+      email: 'valid_email',
+      password: 'valid_password'
+    }
+    const account = await sut.add(dataAccount)
+    expect(account).toEqual({
+      id: 'valid_id',
+      name: 'valid_name',
+      email: 'valid_email',
+      password: 'hashed_password'
+    })
   })
 })
