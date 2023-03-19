@@ -166,7 +166,7 @@ describe('SingnUp Controller', () => {
     }
     const httpReponse = await sut.handle(httpRequest)
     expect(httpReponse.statusCode).toBe(500)
-    expect(httpReponse.body).toEqual(new ServerError())
+    expect(httpReponse.body).toEqual(new ServerError('err'))
   })
 
   test('Should addAccount if not valid values', async () => {
@@ -205,7 +205,7 @@ describe('SingnUp Controller', () => {
     }
     const httpReponse = await sut.handle(httpRequest)
     expect(httpReponse.statusCode).toBe(500)
-    expect(httpReponse.body).toEqual(new ServerError())
+    expect(httpReponse.body).toEqual(new ServerError('err'))
   })
 
   test('Should return 200 if valid data is provided', async () => {
