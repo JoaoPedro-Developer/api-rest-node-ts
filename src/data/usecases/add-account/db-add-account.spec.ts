@@ -49,16 +49,11 @@ const makeFakeDataAccount = (): AddAccountModel => ({
   password: 'valid_password'
 })
 
-describe('', () => {
+describe('DbAddAccountUseCase', () => {
   test('Should return Encrypter with correct', async () => {
     const { sut, encrypterStub } = makeSut()
     const encryptSpy = jest.spyOn(encrypterStub, 'encrypt')
-    const dataAccount = {
-      name: 'valid_name',
-      email: 'valid_email',
-      password: 'valid_password'
-    }
-    await sut.add(dataAccount)
+    await sut.add(makeFakeDataAccount())
     expect(encryptSpy).toHaveBeenCalledWith('valid_password')
   })
 

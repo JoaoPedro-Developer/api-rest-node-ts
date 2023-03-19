@@ -11,7 +11,7 @@ interface SutTypes {
 
 const makeLogErrorRespository = (): LogErrorRepository => {
   class LogErrorRespositoryStub implements LogErrorRepository {
-    async log (stack: string): Promise<void> {
+    async logError (stack: string): Promise<void> {
       return new Promise(resolve => resolve())
     }
   }
@@ -78,7 +78,7 @@ describe('LogController Decorator', () => {
     const { sut, controllerStub, LogErrorRepositoryStub } = makeSut()
     const error = makeFakeServerError()
     jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(new Promise(resolve => resolve(error)))
-    const logSpy = jest.spyOn(LogErrorRepositoryStub, 'log')
+    const logSpy = jest.spyOn(LogErrorRepositoryStub, 'logError')
     await sut.handle(makeFakeRequest())
     expect(logSpy).toHaveBeenCalledWith('any_stack')
   })
