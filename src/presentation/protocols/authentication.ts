@@ -1,5 +1,3 @@
-import { HttpResponse } from './http'
-
 export interface Authentication {
-  auth (email: string, password: string): Promise<HttpResponse>
+  auth (email: string, password: string): Promise<string>
 }
