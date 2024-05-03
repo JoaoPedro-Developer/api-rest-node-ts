@@ -1,9 +1,16 @@
 {
-    "compilerOptions": {
-        "outDir": "./dist",
+    //Default Options of TypeScript
+    "compilerOptions":{
+        // Dizer onde será gerado o arquivo JS criado pelo TypeScript
+        "outDir":"./dist",
+        //ES 2019 utilizar Import
         "module": "CommonJS",
-        "target": "ES2019",
-        "esModuleInterop": true,
+        //Alvo da versão do ES
+        "target":"ES2019",
+        //Converter modulos que usam Require e module.exports
+        "esModuleInterop":true,
+        //Arquivos de Config JS em vez de JSON inclue no list
         "allowJs": true
+        
     }
 }
