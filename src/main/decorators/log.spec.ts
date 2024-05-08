@@ -25,12 +25,20 @@ const makeHttpRequest = (): HttpRequest => ({
   }
 })
 
+const makeSut = (): any => {
+  const controllerStub = makeControllerStub()
+  const sut = new LogControllerDecorator(controllerStub)
+  return {
+    sut,
+    controllerStub
+  }
+}
+
 describe('Log Controller Decorator', () => {
   test('Should call controller handle', async () => {
-    const controllerStub = makeControllerStub()
+    const { controllerStub, sut } = makeSut()
     const handleSpy = jest.spyOn(controllerStub, 'handle')
     const httpRequest = makeHttpRequest()
-    const sut = new LogControllerDecorator(controllerStub)
     await sut.handle(httpRequest)
     expect(handleSpy).toHaveBeenCalledWith(httpRequest)
   })
