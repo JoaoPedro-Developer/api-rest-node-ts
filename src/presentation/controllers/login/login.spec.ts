@@ -1,9 +1,7 @@
-import { EmailValidator } from '../signup/signup-protocols'
+import { EmailValidator, HttpRequest, Authentication } from './login-protocols'
 import { InvalidParamError, MissingParamError } from '../../errors'
 import { badRequest, serverError, unauthorized } from '../../helpers/http-helpers'
-import { HttpRequest } from '../../protocols'
 import { LoginController } from './login'
-import { Authentication } from '../../../domain/usecases/authentication'
 
 interface SutTypes {
   sut: LoginController
