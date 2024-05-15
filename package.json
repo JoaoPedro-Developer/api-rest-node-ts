@@ -20,6 +20,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
     "@types/jest": "24.0.25",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/mongodb": "^4.0.7",
     "@types/node": "^18.14.6",
     "@types/supertest": "^2.0.16",
@@ -44,6 +45,7 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^4.17.2",
     "validator": "^13.11.0"
   }
